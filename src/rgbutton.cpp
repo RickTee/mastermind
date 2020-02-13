@@ -15,7 +15,7 @@
 
 RgButton::RgButton(const QString &idx, QPushButton * parent) :  QPushButton(idx, parent) {
     //setStyleSheet("QPushButton {background-color: yellow; font: 10px }");
-    setFixedSize(40, 40);
+    setFixedSize(30, 30);
 }
 
 RgButton::RgButton(const RgButton& orig, QPushButton * parent) : QPushButton(parent) {

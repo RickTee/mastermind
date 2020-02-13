@@ -22,6 +22,9 @@
 #include <QWidget>
 #include <QHBoxLayout>
 #include <QGridLayout>
+#include <QSizePolicy>
+#include <QFrame>
+#include <QLabel>
 #include "rgbutton.h"
 
 class RgMasterMind : public QWidget {
@@ -31,10 +34,22 @@ public:
     RgMasterMind(const RgMasterMind & orig, QWidget * parent = 0);
     virtual ~RgMasterMind();
 private:
-    QHBoxLayout *hbox;
-    QVBoxLayout *vbox;
+    QHBoxLayout *hbox_0;
+    QHBoxLayout *hbox_1;
+    QHBoxLayout *blk_pegs_hbox;
+    QHBoxLayout *wht_pegs_hbox;
+    QVBoxLayout *vbox_0;
+    QVBoxLayout *score_vbox;
     QGridLayout *grid;
+    QFrame      *hline;
+    QFrame      *score_frame;
+    QLabel      *white_pegs;
+    QLabel      *black_pegs;
+    QLabel      *black_peg_num;
+    QLabel      *white_peg_num;
+    RgButton    *code_buttons[CODE_LEN];
     RgButton    *try_buttons[NUM_OF_TRY_BTNS];
+    
 };
 
 #endif /* RGMASTERMIND_H */
