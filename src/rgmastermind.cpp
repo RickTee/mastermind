@@ -27,6 +27,8 @@ RgMasterMind::RgMasterMind(const QString &title, QWidget * parent) : QWidget(par
     vline->setFrameStyle(QFrame::VLine|QFrame::Sunken);
     vline->setLineWidth(3);
     
+    makeMenu();
+    vbox->setMenuBar(menuBar);
     // The secret code + labels for white and black pegs
     QString idx;
     int i, j, k = 0;
@@ -75,6 +77,10 @@ RgMasterMind::RgMasterMind(const QString &title, QWidget * parent) : QWidget(par
     goButton = new RgButton("Go");
     grid->addWidget(guessButtons[i], 12, 4);
    
+    playerMsg = new QLabel("");
+    codeMsg = new QLabel("Secret code");
+    vbox->addWidget(playerMsg);
+    vbox->addWidget(codeMsg);
     vbox->addLayout(grid);
     setLayout(vbox);
     // Turn count decremented with each guess, if zero game is over
@@ -88,3 +94,34 @@ RgMasterMind::RgMasterMind(const RgMasterMind& orig, QWidget * parent) : QWidget
 RgMasterMind::~RgMasterMind() {
 }
 
+// Create a menu bar and add a File menu with entries for 'New game' and 'Quit'
+void RgMasterMind::makeMenu() {
+    menuBar = new QMenuBar;
+    
+    fileMenu = new QMenu(tr("&File"), this);
+    newGameAction = new QAction(QIcon("icons/new_game.png"), "New game");
+    connect(newGameAction, SIGNAL(triggered()), this, SLOT(newGame()));
+    fileMenu->addAction(newGameAction);
+    
+    fileMenu->addSeparator();
+    
+    quitAction = new QAction(QIcon("icons/exit.png"), "Quit");
+    connect(quitAction, SIGNAL(triggered()), this, SLOT(close()));
+    fileMenu->addAction(quitAction);
+    
+    aboutMenu = new QMenu(tr("&Help"), this);
+    aboutAction = new QAction("About");
+    connect(aboutAction, SIGNAL(triggered()), this, SLOT(about()));
+    aboutMenu->addAction(aboutAction);
+    
+    menuBar->addMenu(fileMenu);
+    menuBar->addMenu(aboutMenu);
+}
+
+void RgMasterMind::newGame() {
+    
+}
+
+void RgMasterMind::about() {
+    
+}

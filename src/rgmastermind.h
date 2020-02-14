@@ -22,7 +22,7 @@
 #include <QWidget>
 #include <QHBoxLayout>
 #include <QGridLayout>
-#include <QSizePolicy>
+#include <QMenuBar>
 #include <QFrame>
 #include <QLabel>
 #include "rgbutton.h"
@@ -34,12 +34,22 @@ public:
     RgMasterMind(const RgMasterMind & orig, QWidget * parent = 0);
     virtual ~RgMasterMind();
 private:
+    void makeMenu();
+    
+    QMenuBar    *menuBar;
+    QMenu       *fileMenu;
+    QMenu       *aboutMenu;
+    QAction     *newGameAction;
+    QAction     *quitAction;
+    QAction     *aboutAction;
     QVBoxLayout *vbox;
     QVBoxLayout *scoreVbox;
     QGridLayout *grid;
     QFrame      *bottomHline;
     QFrame      *topHline;
     QFrame      *vline;
+    QLabel      *codeMsg;
+    QLabel      *playerMsg;
     QLabel      *whitePegs;
     QLabel      *blackPegs;
     QLabel      *blackPegNum[NUM_OF_TRYS];
@@ -49,6 +59,10 @@ private:
     RgButton    *guessButtons[CODE_LEN];
     RgButton    *goButton;
     int         turnCount;
+    
+    public slots:
+        void newGame();
+        void about();
 };
 
 #endif /* RGMASTERMIND_H */
