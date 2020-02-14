@@ -15,60 +15,62 @@
 
 RgMasterMind::RgMasterMind(const QString &title, QWidget * parent) : QWidget(parent) {
     setWindowTitle(title);
-    hbox_0 = new QHBoxLayout;
-    hbox_1 = new QHBoxLayout;
-    vbox_0 = new QVBoxLayout;
+    vbox = new QVBoxLayout;
     grid = new QGridLayout;
-    hline = new QFrame;
-    hline->setFrameStyle(QFrame::HLine|QFrame::Sunken);
-    hline->setLineWidth(3);
+    topHline = new QFrame;
+    topHline->setFrameStyle(QFrame::HLine|QFrame::Sunken);
+    topHline->setLineWidth(3);
+    bottomHline = new QFrame;
+    bottomHline->setFrameStyle(QFrame::HLine|QFrame::Sunken);
+    bottomHline->setLineWidth(3);
+    vline = new QFrame;
+    vline->setFrameStyle(QFrame::VLine|QFrame::Sunken);
+    vline->setLineWidth(3);
     
     // The secret code
     QString idx;
     int i, j, k = 0;
-    for(i = 0; i < CODE_LEN; i++) {
-        code_buttons[i] = new RgButton(idx.setNum(i));
-        hbox_1->addWidget(code_buttons[i]);
+    for(j = 0; j < CODE_LEN; j++) {
+        codeButtons[j] = new RgButton(idx.setNum(j));
+        grid->addWidget(codeButtons[j],0,j);
     }
+    whitePegs = new QLabel("White");
+    grid->addWidget(whitePegs,0,CODE_LEN);
+    blackPegs = new QLabel("Black");
+    grid->addWidget(vline, 1, CODE_LEN + 1, 11, 1);
+    grid->addWidget(blackPegs,0,CODE_LEN + 2);
+    grid->addWidget(topHline, 1, 0, 1, 7);
     
     // Create the try buttons for each guess
-    for(i = 0; i < NUM_OF_TRYS; i++) {
+    for(i = 2; i < NUM_OF_TRYS + 2; i++) {
         for(j = 0; j < CODE_LEN; j++) {
-            try_buttons[k] = new RgButton(idx.setNum(k));
-            grid->addWidget(try_buttons[k], i, j);
+            if(i == 11) {
+               grid->addWidget(bottomHline, i, 0, 1, 8);
+               continue;
+            }
+            guessButtons[k] = new RgButton(idx.setNum(k));
+            grid->addWidget(guessButtons[k], i, j);
             k++;
         }
     }
-    // Create the score area with black and white peg count labels
-    score_vbox = new QVBoxLayout;
-    score_frame= new QFrame;
-    score_frame->setFrameStyle(QFrame::Panel|QFrame::Raised);
-    score_frame->setLineWidth(3);
+    k = 0;
+    for(i = 2; i < NUM_OF_TRYS + 1; i++) {
+        whitePegNum[k] = new QLabel("0");
+        whitePegNum[k]->setAlignment(Qt::AlignHCenter);
+        blackPegNum[k] = new QLabel("0");
+        blackPegNum[k]->setAlignment(Qt::AlignHCenter);
+        grid->addWidget(whitePegNum[k], i, 4);
+        grid->addWidget(blackPegNum[k], i, 6);
+        k++;
+    }
     
-    wht_pegs_hbox = new QHBoxLayout;
-    white_pegs = new QLabel("White pegs");
-    white_peg_num = new QLabel("0");
-    wht_pegs_hbox->addWidget(white_pegs);
-    wht_pegs_hbox->addWidget(white_peg_num);
     
-    blk_pegs_hbox = new QHBoxLayout;
-    black_pegs = new QLabel("Black pegs");
-    black_peg_num = new QLabel("0");
-    blk_pegs_hbox->addWidget(black_pegs);
-    blk_pegs_hbox->addWidget(black_peg_num);
-    
-    score_vbox->addStretch(100);
-    score_vbox->addLayout(wht_pegs_hbox);
-    score_vbox->addLayout(blk_pegs_hbox);
-    score_vbox->addStretch(100);
-    score_frame->setLayout(score_vbox);
-    
-    vbox_0->addLayout(hbox_1);
-    vbox_0->addWidget(hline);
-    vbox_0->addLayout(grid);
-    hbox_0->addLayout(vbox_0);
-    hbox_0->addWidget(score_frame);
-    setLayout(hbox_0);
+    //whitePegNum = new QLabel("0");
+    //blackPegNum = new QLabel("0");
+   
+    vbox->addLayout(grid);
+
+    setLayout(vbox);
     
 }
 

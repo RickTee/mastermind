@@ -34,21 +34,18 @@ public:
     RgMasterMind(const RgMasterMind & orig, QWidget * parent = 0);
     virtual ~RgMasterMind();
 private:
-    QHBoxLayout *hbox_0;
-    QHBoxLayout *hbox_1;
-    QHBoxLayout *blk_pegs_hbox;
-    QHBoxLayout *wht_pegs_hbox;
-    QVBoxLayout *vbox_0;
-    QVBoxLayout *score_vbox;
+    QVBoxLayout *vbox;
+    QVBoxLayout *scoreVbox;
     QGridLayout *grid;
-    QFrame      *hline;
-    QFrame      *score_frame;
-    QLabel      *white_pegs;
-    QLabel      *black_pegs;
-    QLabel      *black_peg_num;
-    QLabel      *white_peg_num;
-    RgButton    *code_buttons[CODE_LEN];
-    RgButton    *try_buttons[NUM_OF_TRY_BTNS];
+    QFrame      *bottomHline;
+    QFrame      *topHline;
+    QFrame      *vline;
+    QLabel      *whitePegs;
+    QLabel      *blackPegs;
+    QLabel      *blackPegNum[NUM_OF_TRYS];
+    QLabel      *whitePegNum[NUM_OF_TRYS];
+    RgButton    *codeButtons[CODE_LEN];
+    RgButton    *guessButtons[NUM_OF_TRY_BTNS];
     
 };
 
