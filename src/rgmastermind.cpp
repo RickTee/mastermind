@@ -27,7 +27,7 @@ RgMasterMind::RgMasterMind(const QString &title, QWidget * parent) : QWidget(par
     vline->setFrameStyle(QFrame::VLine|QFrame::Sunken);
     vline->setLineWidth(3);
     
-    // The secret code
+    // The secret code + labels for white and black pegs
     QString idx;
     int i, j, k = 0;
     for(j = 0; j < CODE_LEN; j++) {
@@ -41,18 +41,20 @@ RgMasterMind::RgMasterMind(const QString &title, QWidget * parent) : QWidget(par
     grid->addWidget(blackPegs,0,CODE_LEN + 2);
     grid->addWidget(topHline, 1, 0, 1, 7);
     
-    // Create the try buttons for each guess
+    // Create the buttons for each guess
     for(i = 2; i < NUM_OF_TRYS + 2; i++) {
         for(j = 0; j < CODE_LEN; j++) {
             if(i == 11) {
                grid->addWidget(bottomHline, i, 0, 1, 8);
                continue;
             }
-            guessButtons[k] = new RgButton(idx.setNum(k));
-            grid->addWidget(guessButtons[k], i, j);
+            tryButtons[k] = new RgButton(idx.setNum(k));
+            grid->addWidget(tryButtons[k], i, j);
             k++;
         }
     }
+    // Add the score labels to hold number of black and white pegs for each
+    // guess.
     k = 0;
     for(i = 2; i < NUM_OF_TRYS + 1; i++) {
         whitePegNum[k] = new QLabel("0");
@@ -63,14 +65,20 @@ RgMasterMind::RgMasterMind(const QString &title, QWidget * parent) : QWidget(par
         grid->addWidget(blackPegNum[k], i, 6);
         k++;
     }
-    
-    
-    //whitePegNum = new QLabel("0");
-    //blackPegNum = new QLabel("0");
+    // Add the user input bit
+    for(i = 0; i < CODE_LEN; i++) {
+        guessButtons[i] = new RgButton(idx.setNum(i));
+        grid->addWidget(guessButtons[i], 12, i);
+    }
+    // Add the Go button which will set the try buttons and calculate
+    // the white and black pegs.
+    goButton = new RgButton("Go");
+    grid->addWidget(guessButtons[i], 12, 4);
    
     vbox->addLayout(grid);
-
     setLayout(vbox);
+    // Turn count decremented with each guess, if zero game is over
+    turnCount = 10;
     
 }
 

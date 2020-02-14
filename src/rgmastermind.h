@@ -45,8 +45,10 @@ private:
     QLabel      *blackPegNum[NUM_OF_TRYS];
     QLabel      *whitePegNum[NUM_OF_TRYS];
     RgButton    *codeButtons[CODE_LEN];
-    RgButton    *guessButtons[NUM_OF_TRY_BTNS];
-    
+    RgButton    *tryButtons[NUM_OF_TRY_BTNS];
+    RgButton    *guessButtons[CODE_LEN];
+    RgButton    *goButton;
+    int         turnCount;
 };
 
 #endif /* RGMASTERMIND_H */
