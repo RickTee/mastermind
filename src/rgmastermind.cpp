@@ -144,6 +144,11 @@ void RgMasterMind::about() {
     email->setAlignment(Qt::AlignHCenter);
     vbox->addWidget(email);
     
+    QPushButton *btn = new QPushButton("Close");
+    //btn->setAlignment(Qt::AlignHCenter);
+    connect(btn, SIGNAL(clicked()), helpAbout, SLOT(close()));
+    vbox->addWidget(btn);
+    
     this->helpAbout->setLayout(vbox);
     this->helpAbout->show();
 }
