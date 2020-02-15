@@ -99,7 +99,7 @@ void RgMasterMind::makeMenu() {
     menuBar = new QMenuBar;
     
     fileMenu = new QMenu(tr("&File"), this);
-    newGameAction = new QAction(QIcon("icons/new_game.png"), "New game");
+    newGameAction = new QAction(QIcon("icons/new-game.png"), "New game");
     connect(newGameAction, SIGNAL(triggered()), this, SLOT(newGame()));
     fileMenu->addAction(newGameAction);
     
@@ -110,7 +110,7 @@ void RgMasterMind::makeMenu() {
     fileMenu->addAction(quitAction);
     
     aboutMenu = new QMenu(tr("&Help"), this);
-    aboutAction = new QAction("About");
+    aboutAction = new QAction(QIcon("icons/help-about.png"),"About");
     connect(aboutAction, SIGNAL(triggered()), this, SLOT(about()));
     aboutMenu->addAction(aboutAction);
     
