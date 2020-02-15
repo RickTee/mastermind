@@ -25,6 +25,8 @@
 #include <QMenuBar>
 #include <QFrame>
 #include <QLabel>
+#include <QDialog>
+#include "version.h"
 #include "rgbutton.h"
 
 class RgMasterMind : public QWidget {
@@ -35,7 +37,7 @@ public:
     virtual ~RgMasterMind();
 private:
     void makeMenu();
-    
+    QDialog     *helpAbout;
     QMenuBar    *menuBar;
     QMenu       *fileMenu;
     QMenu       *aboutMenu;

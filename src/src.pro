@@ -22,5 +22,5 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 CONFIG += debug
 # Input
-HEADERS += rgbutton.h rgmastermind.h
+HEADERS += rgbutton.h rgmastermind.h version.h
 SOURCES += main.cpp rgbutton.cpp rgmastermind.cpp

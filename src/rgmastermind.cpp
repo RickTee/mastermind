@@ -123,5 +123,27 @@ void RgMasterMind::newGame() {
 }
 
 void RgMasterMind::about() {
+    this->helpAbout = new QDialog(this);
+    this->helpAbout->setModal(true);
+    this->helpAbout->setWindowTitle("About");
+    QVBoxLayout *vbox = new QVBoxLayout;
     
+    QLabel *progName = new QLabel(APPLICATION);
+    progName->setAlignment(Qt::AlignHCenter);
+    vbox->addWidget(progName);
+    
+    QLabel *description = new QLabel(DESCRIPTION);
+    description->setAlignment(Qt::AlignHCenter);
+    vbox->addWidget(description);
+    
+    QLabel *author = new QLabel("Author: " AUTHOR);
+    author->setAlignment(Qt::AlignHCenter);
+    vbox->addWidget(author);
+    
+    QLabel *email = new QLabel(EMAIL);
+    email->setAlignment(Qt::AlignHCenter);
+    vbox->addWidget(email);
+    
+    this->helpAbout->setLayout(vbox);
+    this->helpAbout->show();
 }

@@ -14,6 +14,7 @@
 #include <cstdlib>
 #include <QApplication>
 #include "rgmastermind.h"
+#include "version.h"
 
 int main(int argc, char *argv[]) {
     // initialize resources, if needed

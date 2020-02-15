@@ -182,7 +182,8 @@ DIST          = /usr/lib64/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib64/qt5/mkspecs/features/yacc.prf \
 		/usr/lib64/qt5/mkspecs/features/lex.prf \
 		src.pro rgbutton.h \
-		rgmastermind.h main.cpp \
+		rgmastermind.h \
+		version.h main.cpp \
 		rgbutton.cpp \
 		rgmastermind.cpp
 QMAKE_TARGET  = mastermind
@@ -464,7 +465,7 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents /usr/lib64/qt5/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents rgbutton.h rgmastermind.h $(DISTDIR)/
+	$(COPY_FILE) --parents rgbutton.h rgmastermind.h version.h $(DISTDIR)/
 	$(COPY_FILE) --parents main.cpp rgbutton.cpp rgmastermind.cpp $(DISTDIR)/
 
 
@@ -525,7 +526,8 @@ compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean
 ####### Compile
 
 main.o: main.cpp rgmastermind.h \
-		rgbutton.h
+		rgbutton.h \
+		version.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o main.cpp
 
 rgbutton.o: rgbutton.cpp rgbutton.h
