@@ -17,7 +17,6 @@
 #define NUM_OF_TRYS 10
 #define CODE_LEN 4
 #define NUM_OF_TRY_BTNS (NUM_OF_TRYS * CODE_LEN)
-#define COLORS 6
 
 #include <cstdlib> 
 #include <ctime> 

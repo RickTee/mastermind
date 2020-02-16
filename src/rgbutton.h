@@ -13,6 +13,8 @@
 #ifndef RGBUTTON_H
 #define RGBUTTON_H
 
+#define COLORS 6
+
 #include <QPushButton>
 
 class RgButton : public QPushButton {
@@ -22,9 +24,8 @@ public:
     RgButton(const RgButton& orig, QPushButton * parent = 0);
     virtual ~RgButton();
     
-    void setIndex(int idx);
     int getIndex();
-    void setColor(const QString color);
+    void setColor(int idx);
 private:
     int index;
 };

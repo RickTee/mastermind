@@ -14,12 +14,6 @@
 #include "rgmastermind.h"
 
 void randomize(void);
-char colors[COLORS][255] = {"QPushButton {background-color: red}",
-    "QPushButton {background-color: orange}",
-    "QPushButton {background-color: blue}",
-    "QPushButton {background-color: green}",
-    "QPushButton {background-color: magenta}",
-    "QPushButton {background-color: yellow}"};
 
 RgMasterMind::RgMasterMind(const QString &title, QWidget * parent) : QWidget(parent) {
     setWindowTitle(title);
@@ -46,8 +40,7 @@ RgMasterMind::RgMasterMind(const QString &title, QWidget * parent) : QWidget(par
         codeButtons[j] = new RgButton("");
         grid->addWidget(codeButtons[j], 0, j);
         code[j] = rgRnd();
-        codeButtons[j]->setColor(colors[code[j]]);
-        codeButtons[j]->setIndex(code[j]);
+        //codeButtons[j]->setColor(code[j]);
     }
     whitePegs = new QLabel("White");
     grid->addWidget(whitePegs, 0, CODE_LEN);
@@ -80,7 +73,6 @@ RgMasterMind::RgMasterMind(const QString &title, QWidget * parent) : QWidget(par
     // Add the user input bit
     for (i = 0; i < CODE_LEN; i++) {
         guessButtons[i] = new RgButton("");
-        guessButtons[i]->setIndex(0);
         grid->addWidget(guessButtons[i], 13, i);
         connect(guessButtons[i], SIGNAL(clicked()), SLOT(cycleColor()));
     }
@@ -174,16 +166,14 @@ void RgMasterMind::cycleColor() {
     if (idx >= COLORS) {
         idx = 0;
     }
-    btn->setIndex(idx);
-    btn->setColor(colors[idx]);
+    btn->setColor(idx);
 }
 
 void RgMasterMind::guess() {
     int i, idx;
     for (i = 0; i < CODE_LEN; i++) {
         idx = this->guessButtons[i]->getIndex();
-        this->tryButtons[i + turnCount]->setColor(colors[idx]);
-        this->tryButtons[i + turnCount]->setIndex(idx);
+        this->tryButtons[i + turnCount]->setColor(idx);
     }
     compPegs();
 }
@@ -191,15 +181,19 @@ void RgMasterMind::guess() {
 void RgMasterMind::compPegs() {
     // Check secret code for matches set score labels with
     // black and white peg numbers;
-    int i, j, blackPegs, whitePegs = 0;
+    int i, j, idx, blackPegs, whitePegs = 0;
     for (i = 0; i < CODE_LEN; i++) {
-        if (this->tryButtons[i + turnCount]->getIndex() == code[i]) {
+        if (this->guessButtons[i]->getIndex() == code[i]) {
             blackPegs++;
         }
     }
+    if(blackPegs == CODE_LEN) {
+        endGame();
+    }
     for (i = 0; i < CODE_LEN; i++) {
         for (j = 0; j < CODE_LEN; j++) {
-            if (this->tryButtons[i + turnCount]->getIndex() == code[j]) {
+            idx = this->guessButtons[i]->getIndex();
+            if (idx == code[j]) {
                 whitePegs++;
                 break;
             }
@@ -207,17 +201,22 @@ void RgMasterMind::compPegs() {
     }
     QString pegs;
     whitePegs = whitePegs - blackPegs;
-    this->whitePegNum[turnCount]->setText(pegs.setNum(whitePegs));
-    this->blackPegNum[turnCount]->setText(pegs.setNum(blackPegs));
+    this->whitePegNum[turnCount/4]->setText(pegs.setNum(whitePegs));
+    this->blackPegNum[turnCount/4]->setText(pegs.setNum(blackPegs));
     
     turnCount += 4;
-    if (turnCount >= NUM_OF_TRYS) {
+    if (turnCount >= NUM_OF_TRYS * 4) {
         endGame();
     }
 }
 
 void RgMasterMind::endGame() {
     // Game over stop everything
+    int i;
+    for (i = 0; i < CODE_LEN; i++) {
+        codeButtons[i]->setColor(code[i]);
+    }
+    printf("End Game\n");
 }
 
 int RgMasterMind::rgRnd() {
@@ -226,7 +225,7 @@ int RgMasterMind::rgRnd() {
 
     do {
         retval = rand() / divisor;
-    } while (retval > COLORS);
+    } while (retval > (COLORS - 1));
 
     return retval;
 }
