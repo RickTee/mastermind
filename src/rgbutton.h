@@ -21,8 +21,12 @@ public:
     RgButton(const QString &idx, QPushButton * parent = 0);
     RgButton(const RgButton& orig, QPushButton * parent = 0);
     virtual ~RgButton();
+    
+    void setIndex(int idx);
+    int getIndex();
+    void setColor(const QString color);
 private:
-
+    int index;
 };
 
 #endif /* RGBUTTON_H */

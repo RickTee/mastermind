@@ -24,3 +24,17 @@ RgButton::RgButton(const RgButton& orig, QPushButton * parent) : QPushButton(par
 
 RgButton::~RgButton() {
 }
+
+void RgButton::setIndex(int idx) {
+    this->index = idx;
+}
+
+int RgButton::getIndex() {
+    return this->index;
+}
+
+void RgButton::setColor(const QString color) {
+    //setStyleSheet("QPushButton {background-color: yellow; font: 10px }");
+    
+    this->setStyleSheet(color);
+}

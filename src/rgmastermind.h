@@ -16,9 +16,12 @@
 
 #define NUM_OF_TRYS 10
 #define CODE_LEN 4
-#define COLORS 6
 #define NUM_OF_TRY_BTNS (NUM_OF_TRYS * CODE_LEN)
+#define COLORS 6
 
+#include <cstdlib> 
+#include <ctime> 
+#include <iostream>
 #include <QWidget>
 #include <QHBoxLayout>
 #include <QGridLayout>
@@ -37,6 +40,12 @@ public:
     virtual ~RgMasterMind();
 private:
     void makeMenu();
+    int         rgRnd();
+    void        compPegs();
+    void        endGame();
+    int         *rgrand;
+    int         turnCount;
+    int         code[COLORS];
     QDialog     *helpAbout;
     QMenuBar    *menuBar;
     QMenu       *fileMenu;
@@ -60,11 +69,12 @@ private:
     RgButton    *tryButtons[NUM_OF_TRY_BTNS];
     RgButton    *guessButtons[CODE_LEN];
     RgButton    *goButton;
-    int         turnCount;
     
     public slots:
         void newGame();
         void about();
+        void cycleColor();
+        void guess();
 };
 
 #endif /* RGMASTERMIND_H */
