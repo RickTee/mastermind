@@ -34,12 +34,12 @@ RgMasterMind::RgMasterMind(const QString &title, QWidget * parent) : QWidget(par
     makeMenu();
     vbox->setMenuBar(menuBar);
     // The secret code + labels for white and black pegs
-    QString idx;
     int i, j, k = 0;
-    for (j = 0; j < CODE_LEN; j++) {
-        codeButtons[j] = new RgButton("");
-        grid->addWidget(codeButtons[j], 0, j);
-        code[j] = rgRnd();
+    for (i = 0; i < CODE_LEN; i++) {
+        codeButtons[i] = new RgButton(i);
+        grid->addWidget(codeButtons[i], 0, i);
+        // Generate the random color code
+        code[i] = rgRnd();
         //codeButtons[j]->setColor(code[j]);
     }
     whitePegs = new QLabel("White");
@@ -52,7 +52,7 @@ RgMasterMind::RgMasterMind(const QString &title, QWidget * parent) : QWidget(par
     // Create the buttons for each guess
     for (i = 2; i < NUM_OF_TRYS + 2; i++) {
         for (j = 0; j < CODE_LEN; j++) {
-            tryButtons[k] = new RgButton(idx.setNum(k));
+            tryButtons[k] = new RgButton(k);
             grid->addWidget(tryButtons[k], i, j);
             k++;
         }
@@ -72,13 +72,13 @@ RgMasterMind::RgMasterMind(const QString &title, QWidget * parent) : QWidget(par
     }
     // Add the user input bit
     for (i = 0; i < CODE_LEN; i++) {
-        guessButtons[i] = new RgButton("");
+        guessButtons[i] = new RgButton(i);
         grid->addWidget(guessButtons[i], 13, i);
         connect(guessButtons[i], SIGNAL(clicked()), SLOT(cycleColor()));
     }
     // Add the Go button which will set the try buttons and calculate
     // the white and black pegs.
-    goButton = new RgButton("Go");
+    goButton = new RgButton(0, "Go");
     grid->addWidget(guessButtons[i], 13, 4);
     connect(goButton, SIGNAL(clicked()), SLOT(guess()));
 
@@ -158,22 +158,22 @@ void RgMasterMind::about() {
 }
 
 void RgMasterMind::cycleColor() {
-    int idx;
+    int colorIndex;
     RgButton *btn;
     btn = (RgButton *) QObject::sender();
-    idx = btn->getIndex();
-    idx++;
-    if (idx >= COLORS) {
-        idx = 0;
+    colorIndex = btn->getIndex();
+    colorIndex++;
+    if (colorIndex >= COLORS) {
+        colorIndex = 0;
     }
-    btn->setColor(idx);
+    btn->setColor(colorIndex);
 }
 
 void RgMasterMind::guess() {
-    int i, idx;
+    int i, colorIndex;
     for (i = 0; i < CODE_LEN; i++) {
-        idx = this->guessButtons[i]->getIndex();
-        this->tryButtons[i + turnCount]->setColor(idx);
+        colorIndex = this->guessButtons[i]->getIndex();
+        this->tryButtons[i + turnCount]->setColor(colorIndex);
     }
     compPegs();
 }
