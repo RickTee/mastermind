@@ -23,7 +23,7 @@ char colors[COLORS][255] = {"QPushButton {background-color: red}",
 RgButton::RgButton(int ident, const QString &name, QPushButton * parent) :  QPushButton(name, parent) {
     //setStyleSheet("QPushButton {background-color: yellow; font: 10px }");
     setFixedSize(30, 30);
-    ident = ident;
+    this->ident = ident;
 }
 
 RgButton::~RgButton() {

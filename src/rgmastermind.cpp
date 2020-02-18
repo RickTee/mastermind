@@ -78,13 +78,11 @@ RgMasterMind::RgMasterMind(const QString &title, QWidget * parent) : QWidget(par
     }
     // Add the Go button which will set the try buttons and calculate
     // the white and black pegs.
-    goButton = new RgButton(0, "Go");
-    grid->addWidget(guessButtons[i], 13, 4);
+    goButton = new QPushButton("Guess");
+    grid->addWidget(goButton, 13, 4, 1, 3);
     connect(goButton, SIGNAL(clicked()), SLOT(guess()));
 
-    playerMsg = new QLabel("");
     codeMsg = new QLabel("Secret code");
-    vbox->addWidget(playerMsg);
     vbox->addWidget(codeMsg);
     vbox->addLayout(grid);
     setLayout(vbox);
@@ -125,36 +123,6 @@ void RgMasterMind::makeMenu() {
 
 void RgMasterMind::newGame() {
 
-}
-
-void RgMasterMind::about() {
-    this->helpAbout = new QDialog(this);
-    this->helpAbout->setModal(true);
-    this->helpAbout->setWindowTitle("About");
-    QVBoxLayout *vbox = new QVBoxLayout;
-
-    QLabel *progName = new QLabel(APPLICATION);
-    progName->setAlignment(Qt::AlignHCenter);
-    vbox->addWidget(progName);
-
-    QLabel *description = new QLabel(DESCRIPTION);
-    description->setAlignment(Qt::AlignHCenter);
-    vbox->addWidget(description);
-
-    QLabel *author = new QLabel("Author: " AUTHOR);
-    author->setAlignment(Qt::AlignHCenter);
-    vbox->addWidget(author);
-
-    QLabel *email = new QLabel(EMAIL);
-    email->setAlignment(Qt::AlignHCenter);
-    vbox->addWidget(email);
-
-    QPushButton *btn = new QPushButton("Close");
-    connect(btn, SIGNAL(clicked()), helpAbout, SLOT(close()));
-    vbox->addWidget(btn);
-
-    this->helpAbout->setLayout(vbox);
-    this->helpAbout->show();
 }
 
 void RgMasterMind::cycleColor() {
@@ -216,7 +184,37 @@ void RgMasterMind::endGame() {
     for (i = 0; i < CODE_LEN; i++) {
         codeButtons[i]->setColor(code[i]);
     }
-    printf("End Game\n");
+    this->goButton->setDisabled(true);
+}
+
+void RgMasterMind::about() {
+    this->helpAbout = new QDialog(this);
+    this->helpAbout->setModal(true);
+    this->helpAbout->setWindowTitle("About");
+    QVBoxLayout *vbox = new QVBoxLayout;
+
+    QLabel *progName = new QLabel(APPLICATION);
+    progName->setAlignment(Qt::AlignHCenter);
+    vbox->addWidget(progName);
+
+    QLabel *description = new QLabel(DESCRIPTION);
+    description->setAlignment(Qt::AlignHCenter);
+    vbox->addWidget(description);
+
+    QLabel *author = new QLabel("Author: " AUTHOR);
+    author->setAlignment(Qt::AlignHCenter);
+    vbox->addWidget(author);
+
+    QLabel *email = new QLabel(EMAIL);
+    email->setAlignment(Qt::AlignHCenter);
+    vbox->addWidget(email);
+
+    QPushButton *btn = new QPushButton("Close");
+    connect(btn, SIGNAL(clicked()), helpAbout, SLOT(close()));
+    vbox->addWidget(btn);
+
+    this->helpAbout->setLayout(vbox);
+    this->helpAbout->show();
 }
 
 int RgMasterMind::rgRnd() {

@@ -59,7 +59,6 @@ private:
     QFrame      *topHline;
     QFrame      *vline;
     QLabel      *codeMsg;
-    QLabel      *playerMsg;
     QLabel      *whitePegs;
     QLabel      *blackPegs;
     QLabel      *blackPegNum[NUM_OF_TRYS];
@@ -67,7 +66,7 @@ private:
     RgButton    *codeButtons[CODE_LEN];
     RgButton    *tryButtons[NUM_OF_TRY_BTNS];
     RgButton    *guessButtons[CODE_LEN];
-    RgButton    *goButton;
+    QPushButton *goButton;
     
     public slots:
         void newGame();
