@@ -13,12 +13,13 @@
 
 #include "rgbutton.h"
 
-char colors[COLORS][255] = {"QPushButton {background-color: red}",
+char colors[COLORS + 1][255] = {"QPushButton {background-color: red}",
     "QPushButton {background-color: orange}",
     "QPushButton {background-color: blue}",
     "QPushButton {background-color: green}",
     "QPushButton {background-color: magenta}",
-    "QPushButton {background-color: yellow}"};
+    "QPushButton {background-color: yellow}",
+    "QPushButton {background-color: }"};
 
 RgButton::RgButton(int ident, const QString &name, QPushButton * parent) :  QPushButton(name, parent) {
     //setStyleSheet("QPushButton {background-color: yellow; font: 10px }");

@@ -15,6 +15,7 @@
 
 void randomize(void);
 
+// Constructor
 RgMasterMind::RgMasterMind(const QString &title, QWidget * parent) : QWidget(parent) {
     setWindowTitle(title);
     vbox = new QVBoxLayout;
@@ -61,22 +62,22 @@ RgMasterMind::RgMasterMind(const QString &title, QWidget * parent) : QWidget(par
     // Add the score labels to hold number of black and white pegs for each
     // guess.
     k = 0;
-    for (i = 2; i < NUM_OF_TRYS + 2; i++) {
+    for (i = 0; i < NUM_OF_TRYS; i++) {
         whitePegNum[k] = new QLabel("0");
         whitePegNum[k]->setAlignment(Qt::AlignCenter);
         blackPegNum[k] = new QLabel("0");
         blackPegNum[k]->setAlignment(Qt::AlignCenter);
-        grid->addWidget(whitePegNum[k], i, 4);
-        grid->addWidget(blackPegNum[k], i, 6);
+        grid->addWidget(whitePegNum[k], i + 2, 4);
+        grid->addWidget(blackPegNum[k], i + 2, 6);
         k++;
     }
-    // Add the user input bit
+    // Add the user input buttons
     for (i = 0; i < CODE_LEN; i++) {
         guessButtons[i] = new RgButton(i);
         grid->addWidget(guessButtons[i], 13, i);
         connect(guessButtons[i], SIGNAL(clicked()), SLOT(cycleColor()));
     }
-    // Add the Go button which will set the try buttons and calculate
+    // Add the Guess button which will set the try buttons and calculate
     // the white and black pegs.
     goButton = new QPushButton("Guess");
     grid->addWidget(goButton, 13, 4, 1, 3);
@@ -86,13 +87,11 @@ RgMasterMind::RgMasterMind(const QString &title, QWidget * parent) : QWidget(par
     vbox->addWidget(codeMsg);
     vbox->addLayout(grid);
     setLayout(vbox);
-    // Turn count decremented with each guess, if zero game is over
+    // Turn count incremented with each guess, if 10 game is over
     turnCount = 0;
 }
 
-RgMasterMind::RgMasterMind(const RgMasterMind& orig, QWidget * parent) : QWidget(parent) {
-}
-
+// Destructor
 RgMasterMind::~RgMasterMind() {
 }
 
@@ -121,8 +120,28 @@ void RgMasterMind::makeMenu() {
     menuBar->addMenu(aboutMenu);
 }
 
+// Reset all buttons, black and white peg labels and guess count, generate a new secret code, 
+// enable the Guess button
 void RgMasterMind::newGame() {
-
+    
+    int i;
+    for(i = 0; i < CODE_LEN; i++) {
+        this->codeButtons[i]->setColor(6);
+        this->guessButtons[i]->setColor(6);
+        // Generate a new code
+        code[i] = rgRnd();
+    }
+    for(i = 0; i < NUM_OF_TRY_BTNS; i++) {
+        this->tryButtons[i]->setColor(6);
+    }
+    
+    for(i = 0; i < NUM_OF_TRYS; i++) {
+        this->blackPegNum[i]->setText("0");
+        this->whitePegNum[i]->setText("0");
+    }
+    this->turnCount = 0;
+    // Enable the Guess button
+    this->goButton->setEnabled(true);
 }
 
 void RgMasterMind::cycleColor() {
