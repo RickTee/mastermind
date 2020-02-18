@@ -11,6 +11,8 @@
  * Created on 13 February 2020, 07:45
  */
 
+#include <qt5/QtWidgets/qtabwidget.h>
+
 #include "rgmastermind.h"
 
 void randomize(void);
@@ -211,22 +213,25 @@ void RgMasterMind::about() {
     this->helpAbout->setModal(true);
     this->helpAbout->setWindowTitle("About");
     QVBoxLayout *vbox = new QVBoxLayout;
-
-    QLabel *progName = new QLabel(APPLICATION);
+    
+    const QString *aboutString = new QString(APPLICATION"\n" DESCRIPTION"\n" "Author: " AUTHOR"\n" EMAIL);
+    QLabel *progName = new QLabel(*aboutString);
     progName->setAlignment(Qt::AlignHCenter);
-    vbox->addWidget(progName);
-
-    QLabel *description = new QLabel(DESCRIPTION);
-    description->setAlignment(Qt::AlignHCenter);
-    vbox->addWidget(description);
-
-    QLabel *author = new QLabel("Author: " AUTHOR);
-    author->setAlignment(Qt::AlignHCenter);
-    vbox->addWidget(author);
-
-    QLabel *email = new QLabel(EMAIL);
-    email->setAlignment(Qt::AlignHCenter);
-    vbox->addWidget(email);
+    
+    QTabWidget *aboutTabWidget = new QTabWidget();
+    aboutTabWidget->addTab(progName, "About");
+    
+    QLabel *instructions = new QLabel("\nThe buttons at the bottom of the\ninterface cycle through "
+            "the available\ncolors. Once you have selected four colors\npress the Guess button to test "
+            "them against\nthe secret code. The colors are then copied\nto the guess buttons and "
+            "your score for\nthis guess is calculated and displayed.\n");
+    instructions->setAlignment(Qt::AlignHCenter);
+    aboutTabWidget->addTab(instructions, "Instructions");
+    vbox->addWidget(aboutTabWidget);
+    
+//    QLabel *progName = new QLabel(*aboutString);
+//    progName->setAlignment(Qt::AlignHCenter);
+//    vbox->addWidget(progName);
 
     QPushButton *btn = new QPushButton("Close");
     connect(btn, SIGNAL(clicked()), helpAbout, SLOT(close()));

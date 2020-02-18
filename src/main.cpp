@@ -23,7 +23,7 @@ int main(int argc, char *argv[]) {
     QApplication app(argc, argv);
 
     // create and show your widgets here
-    RgMasterMind *game = new RgMasterMind("Things that go bump in the knight");
+    RgMasterMind *game = new RgMasterMind("MasteringtonMindisvill");
     
     game->show();
 
