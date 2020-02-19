@@ -505,7 +505,8 @@ moc_rgbutton.cpp: rgbutton.h \
 		/usr/lib64/qt5/bin/moc
 	/usr/lib64/qt5/bin/moc $(DEFINES) --include ./moc_predefs.h -I/usr/lib64/qt5/mkspecs/linux-g++ -I/home/rick/Projects/mastermind/src -I/home/rick/Projects/mastermind/src -I/usr/include/qt5 -I/usr/include/qt5/QtWidgets -I/usr/include/qt5/QtGui -I/usr/include/qt5/QtCore -I/usr/include/c++/4.8.5 -I/usr/include/c++/4.8.5/x86_64-redhat-linux -I/usr/include/c++/4.8.5/backward -I/usr/lib/gcc/x86_64-redhat-linux/4.8.5/include -I/usr/local/include -I/usr/include rgbutton.h -o moc_rgbutton.cpp
 
-moc_rgmastermind.cpp: rgbutton.h \
+moc_rgmastermind.cpp: version.h \
+		rgbutton.h \
 		rgmastermind.h \
 		moc_predefs.h \
 		/usr/lib64/qt5/bin/moc
@@ -526,14 +527,15 @@ compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean
 ####### Compile
 
 main.o: main.cpp rgmastermind.h \
-		rgbutton.h \
-		version.h
+		version.h \
+		rgbutton.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o main.cpp
 
 rgbutton.o: rgbutton.cpp rgbutton.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o rgbutton.o rgbutton.cpp
 
 rgmastermind.o: rgmastermind.cpp rgmastermind.h \
+		version.h \
 		rgbutton.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o rgmastermind.o rgmastermind.cpp
 

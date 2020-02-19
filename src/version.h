@@ -12,7 +12,7 @@
 #define __VERSION_H__
 
 #define SPC         " "
-#define RELEASE     "0.0"
+#define RELEASE     "0.1"
 #define REVISION    ".4"
 #define DATE        "(Feb 2020)"
 #define YEAR        "2020 - 2024"

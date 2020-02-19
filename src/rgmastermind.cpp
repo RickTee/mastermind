@@ -39,7 +39,7 @@ RgMasterMind::RgMasterMind(const QString &title, QWidget * parent) : QWidget(par
     // The secret code + labels for white and black pegs
     int i, j, k = 0;
     for (i = 0; i < CODE_LEN; i++) {
-        codeButtons[i] = new RgButton(i);
+        codeButtons[i] = new RgButton(BTN_SIZE, BTN_SIZE);
         grid->addWidget(codeButtons[i], 0, i);
         // Generate the random color code
         code[i] = rgRnd();
@@ -55,7 +55,7 @@ RgMasterMind::RgMasterMind(const QString &title, QWidget * parent) : QWidget(par
     // Create the buttons for each guess
     for (i = 2; i < NUM_OF_TRYS + 2; i++) {
         for (j = 0; j < CODE_LEN; j++) {
-            tryButtons[k] = new RgButton(k);
+            tryButtons[k] = new RgButton(BTN_SIZE, BTN_SIZE);
             grid->addWidget(tryButtons[k], i, j);
             k++;
         }
@@ -75,13 +75,13 @@ RgMasterMind::RgMasterMind(const QString &title, QWidget * parent) : QWidget(par
     }
     // Add the user input buttons
     for (i = 0; i < CODE_LEN; i++) {
-        guessButtons[i] = new RgButton(i);
+        guessButtons[i] = new RgButton(BTN_SIZE, BTN_SIZE);
         grid->addWidget(guessButtons[i], 13, i);
         connect(guessButtons[i], SIGNAL(clicked()), SLOT(cycleColor()));
     }
     // Add the Guess button which will set the try buttons and calculate
     // the white and black pegs.
-    goButton = new QPushButton("Guess");
+    goButton = new RgButton("Guess");
     grid->addWidget(goButton, 13, 4, 1, 3);
     connect(goButton, SIGNAL(clicked()), SLOT(guess()));
 
@@ -216,7 +216,7 @@ void RgMasterMind::about() {
     
     const QString *aboutString = new QString(APPLICATION"\n" DESCRIPTION"\n" "Author: " AUTHOR"\n" EMAIL);
     QLabel *progName = new QLabel(*aboutString);
-    progName->setAlignment(Qt::AlignHCenter);
+    progName->setAlignment(Qt::AlignCenter);
     
     QTabWidget *aboutTabWidget = new QTabWidget();
     aboutTabWidget->addTab(progName, "About");
@@ -225,13 +225,9 @@ void RgMasterMind::about() {
             "the available\ncolors. Once you have selected four colors\npress the Guess button to test "
             "them against\nthe secret code. The colors are then copied\nto the guess buttons and "
             "your score for\nthis guess is calculated and displayed.\n");
-    instructions->setAlignment(Qt::AlignHCenter);
+    instructions->setAlignment(Qt::AlignCenter);
     aboutTabWidget->addTab(instructions, "Instructions");
     vbox->addWidget(aboutTabWidget);
-    
-//    QLabel *progName = new QLabel(*aboutString);
-//    progName->setAlignment(Qt::AlignHCenter);
-//    vbox->addWidget(progName);
 
     QPushButton *btn = new QPushButton("Close");
     connect(btn, SIGNAL(clicked()), helpAbout, SLOT(close()));

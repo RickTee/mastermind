@@ -14,6 +14,7 @@
 #ifndef RGMASTERMIND_H
 #define RGMASTERMIND_H
 
+#define BTN_SIZE 30
 #define NUM_OF_TRYS 10
 #define CODE_LEN 4
 #define NUM_OF_TRY_BTNS (NUM_OF_TRYS * CODE_LEN)

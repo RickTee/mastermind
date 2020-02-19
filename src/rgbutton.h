@@ -20,14 +20,14 @@
 class RgButton : public QPushButton {
     Q_OBJECT
 public:
-    RgButton(int ident, const QString &name = "", QPushButton * parent = 0);
+    RgButton(const QString &name = "", QPushButton * parent = 0);
+    RgButton(int sizeX, int sizeY, QPushButton * parent = 0);
     virtual ~RgButton();
     
     int getIndex();
     void setColor(int colorIndex);
 private:
     int colorIndex;
-    int ident;
 };
 
 #endif /* RGBUTTON_H */
