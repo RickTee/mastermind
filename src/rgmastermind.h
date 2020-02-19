@@ -43,6 +43,7 @@ private:
     int         rgRnd();
     void        compPegs();
     void        endGame();
+    void        aboutDialog(int tabIdx);
     int         *rgrand;
     int         turnCount;
     int         code[COLORS];
@@ -53,6 +54,7 @@ private:
     QAction     *newGameAction;
     QAction     *quitAction;
     QAction     *aboutAction;
+    QAction     *instrctAction;
     QVBoxLayout *vbox;
     QVBoxLayout *scoreVbox;
     QGridLayout *grid;
@@ -72,6 +74,7 @@ private:
     public slots:
         void newGame();
         void about();
+        void instructions();
         void cycleColor();
         void guess();
 };

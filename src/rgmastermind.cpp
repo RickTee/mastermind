@@ -76,6 +76,7 @@ RgMasterMind::RgMasterMind(const QString &title, QWidget * parent) : QWidget(par
     // Add the user input buttons
     for (i = 0; i < CODE_LEN; i++) {
         guessButtons[i] = new RgButton(BTN_SIZE, BTN_SIZE);
+        guessButtons[i]->setColor(rgRnd());
         grid->addWidget(guessButtons[i], 13, i);
         connect(guessButtons[i], SIGNAL(clicked()), SLOT(cycleColor()));
     }
@@ -117,6 +118,10 @@ void RgMasterMind::makeMenu() {
     aboutAction = new QAction(QIcon("icons/help-about.png"), "About");
     connect(aboutAction, SIGNAL(triggered()), this, SLOT(about()));
     aboutMenu->addAction(aboutAction);
+    
+    instrctAction = new QAction(QIcon("icons/help-contents.png"), "Instructions");
+    connect(instrctAction, SIGNAL(triggered()), this, SLOT(instructions()));
+    aboutMenu->addAction(instrctAction);
 
     menuBar->addMenu(fileMenu);
     menuBar->addMenu(aboutMenu);
@@ -129,7 +134,7 @@ void RgMasterMind::newGame() {
     int i;
     for(i = 0; i < CODE_LEN; i++) {
         this->codeButtons[i]->setColor(6);
-        this->guessButtons[i]->setColor(6);
+        this->guessButtons[i]->setColor(0);
         // Generate a new code
         code[i] = rgRnd();
     }
@@ -209,6 +214,14 @@ void RgMasterMind::endGame() {
 }
 
 void RgMasterMind::about() {
+    RgMasterMind::aboutDialog(0);
+}
+
+void RgMasterMind::instructions() {
+    RgMasterMind::aboutDialog(1);
+}
+
+void RgMasterMind::aboutDialog(int tabIdx) {
     this->helpAbout = new QDialog(this);
     this->helpAbout->setModal(true);
     this->helpAbout->setWindowTitle("About");
@@ -228,6 +241,8 @@ void RgMasterMind::about() {
     instructions->setAlignment(Qt::AlignCenter);
     aboutTabWidget->addTab(instructions, "Instructions");
     vbox->addWidget(aboutTabWidget);
+    
+    aboutTabWidget->setCurrentIndex(tabIdx);
 
     QPushButton *btn = new QPushButton("Close");
     connect(btn, SIGNAL(clicked()), helpAbout, SLOT(close()));
