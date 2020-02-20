@@ -127,7 +127,7 @@ void RgMasterMind::newGame() {
     int i;
     for(i = 0; i < CODE_LEN; i++) {
         this->codeButtons[i]->setColor(6);
-        this->guessButtons[i]->setColor(0);
+        this->guessButtons[i]->setColor(rgRnd());
         // Generate a new code
         code[i] = rgRnd();
     }
