@@ -1,10 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/* 
+/* MasterMind
  * File:   RgButton.cpp
  * Author: rick
  * 
@@ -33,6 +27,7 @@ RgButton::RgButton(int sizeX, int sizeY, QPushButton * parent) :  QPushButton(pa
 }
 
 RgButton::~RgButton() {
+    delete(this);
 }
 
 int RgButton::getIndex() {

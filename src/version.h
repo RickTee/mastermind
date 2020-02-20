@@ -1,9 +1,9 @@
 /*
  * File: version.h
- * Program: REqualilzer
+ * Program: Mastermind
  * Author: Richard G Townsend
  * Email: ricktee@virginmedia.com
- * Created on: 04 February 2020, 08:44
+ * Created on: 13 February 2020, 08:44
  * Copyright (C) 2020 - 2024  Richard G Townsend
  * Standard major, minor, micro version number.
  */
@@ -13,7 +13,7 @@
 
 #define SPC         " "
 #define RELEASE     "0.1"
-#define REVISION    ".4"
+#define REVISION    ".5"
 #define DATE        "(Feb 2020)"
 #define YEAR        "2020 - 2024"
 #define VERSION     "Version: " RELEASE REVISION SPC DATE

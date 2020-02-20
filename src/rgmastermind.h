@@ -1,10 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/* 
+/* MasterMind
  * File:   RgMasterMind.h
  * Author: rick
  *
@@ -19,12 +13,11 @@
 #define CODE_LEN 4
 #define NUM_OF_TRY_BTNS (NUM_OF_TRYS * CODE_LEN)
 
-#include <cstdlib> 
 #include <ctime> 
-#include <iostream>
 #include <QWidget>
 #include <QHBoxLayout>
 #include <QGridLayout>
+#include <QTabWidget>
 #include <QMenuBar>
 #include <QFrame>
 #include <QLabel>

@@ -1,17 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/* 
+/* MasterMind
  * File:   RgMasterMind.cpp
  * Author: rick
  * 
  * Created on 13 February 2020, 07:45
  */
-
-#include <qt5/QtWidgets/qtabwidget.h>
 
 #include "rgmastermind.h"
 
@@ -96,6 +88,7 @@ RgMasterMind::RgMasterMind(const QString &title, QWidget * parent) : QWidget(par
 
 // Destructor
 RgMasterMind::~RgMasterMind() {
+    delete(this);
 }
 
 // Create a menu bar and add a File menu with entries for 'New game' and 'Quit'
