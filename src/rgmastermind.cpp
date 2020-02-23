@@ -88,7 +88,6 @@ RgMasterMind::RgMasterMind(const QString &title, QWidget * parent) : QWidget(par
 
 // Destructor
 RgMasterMind::~RgMasterMind() {
-    delete(this);
 }
 
 // Create a menu bar and add a File menu with entries for 'New game' and 'Quit'

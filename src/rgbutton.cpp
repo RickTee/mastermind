@@ -27,7 +27,6 @@ RgButton::RgButton(int sizeX, int sizeY, QPushButton * parent) :  QPushButton(pa
 }
 
 RgButton::~RgButton() {
-    delete(this);
 }
 
 int RgButton::getIndex() {
