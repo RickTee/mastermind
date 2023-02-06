@@ -7,8 +7,6 @@
 
 #include "rgmastermind.h"
 
-void randomize(void);
-
 // Constructor
 RgMasterMind::RgMasterMind(const QString &title, QWidget * parent) : QWidget(parent) {
     setWindowTitle(title);
@@ -91,7 +89,6 @@ RgMasterMind::RgMasterMind(const QString &title, QWidget * parent) : QWidget(par
 // Destructor
 RgMasterMind::~RgMasterMind() {
 }
-
 // Create a menu bar and add a File menu and Help menu'
 void RgMasterMind::makeMenu() {
     menuBar = new QMenuBar();
@@ -119,7 +116,6 @@ void RgMasterMind::makeMenu() {
 // Reset all buttons, black and white peg labels and guess count, generate a new secret code, 
 // enable the Guess button
 void RgMasterMind::newGame() {
-    
     int i;
     for(i = 0; i < CODE_LEN; i++) {
         codeButtons[i]->setColor(6);
@@ -141,22 +137,22 @@ void RgMasterMind::newGame() {
 }
 
 void RgMasterMind::cycleColor() {
-    int colorIndex;
+    int colorIndx;
     RgButton *btn;
-    btn = (RgButton *) QObject::sender();
-    colorIndex = btn->getIndex();
-    colorIndex++;
-    if (colorIndex >= COLORS) {
-        colorIndex = 0;
+    btn = (RgButton *) sender();
+    colorIndx = btn->getIndex();
+    colorIndx++;
+    if (colorIndx >= COLORS) {
+        colorIndx = 0;
     }
-    btn->setColor(colorIndex);
+    btn->setColor(colorIndx);
 }
 
 void RgMasterMind::guess() {
-    int i, colorIndex;
+    int i, colorIndx;
     for (i = 0; i < CODE_LEN; i++) {
-        colorIndex = guessButtons[i]->getIndex();
-        tryButtons[i + turnCount]->setColor(colorIndex);
+        colorIndx = guessButtons[i]->getIndex();
+        tryButtons[i + turnCount]->setColor(colorIndx);
     }
     compPegs();
 }
@@ -251,7 +247,7 @@ int RgMasterMind::rgRnd() {
     return retval;
 }
 
-void randomize(void) {
+void RgMasterMind::randomize(void) {
     time_t ltime;
     unsigned int stime;
 

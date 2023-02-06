@@ -1,48 +1,62 @@
-==3943== Memcheck, a memory error detector
-==3943== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==3943== Using Valgrind-3.15.0 and LibVEX; rerun with -h for copyright info
-==3943== Command: ./mastermind
-==3943== Parent PID: 2793
-==3943== 
-==3943== 
-==3943== HEAP SUMMARY:
-==3943==     in use at exit: 368,909 bytes in 7,161 blocks
-==3943==   total heap usage: 54,656 allocs, 47,495 frees, 814,720,915 bytes allocated
-==3943== 
-==3943== 6,757 (232 direct, 6,525 indirect) bytes in 1 blocks are definitely lost in loss record 470 of 488
-==3943==    at 0x4C2C089: calloc (vg_replace_malloc.c:762)
-==3943==    by 0x15EBA3DF: ??? (in /usr/lib64/libdbus-1.so.3.14.14)
-==3943==    by 0x15EC4779: ??? (in /usr/lib64/libdbus-1.so.3.14.14)
-==3943==    by 0x15EC4BA1: ??? (in /usr/lib64/libdbus-1.so.3.14.14)
-==3943==    by 0x15EB860E: ??? (in /usr/lib64/libdbus-1.so.3.14.14)
-==3943==    by 0x15EA32CE: ??? (in /usr/lib64/libdbus-1.so.3.14.14)
-==3943==    by 0x13954BAA: ??? (in /usr/lib64/libQt5DBus.so.5.9.7)
-==3943==    by 0x5BD512D: QObject::event(QEvent*) (in /usr/lib64/libQt5Core.so.5.9.7)
-==3943==    by 0x5BABA54: ??? (in /usr/lib64/libQt5Core.so.5.9.7)
-==3943==    by 0x5BABB6A: QCoreApplication::notifyInternal2(QObject*, QEvent*) (in /usr/lib64/libQt5Core.so.5.9.7)
-==3943==    by 0x5BAE452: QCoreApplicationPrivate::sendPostedEvents(QObject*, int, QThreadData*) (in /usr/lib64/libQt5Core.so.5.9.7)
-==3943==    by 0x5BFAA02: ??? (in /usr/lib64/libQt5Core.so.5.9.7)
-==3943== 
-==3943== 8,938 (48 direct, 8,890 indirect) bytes in 1 blocks are definitely lost in loss record 481 of 488
-==3943==    at 0x4C2A593: operator new(unsigned long) (vg_replace_malloc.c:344)
-==3943==    by 0x40513C: RgMasterMind::makeMenu() (rgmastermind.cpp:106)
-==3943==    by 0x404322: RgMasterMind::RgMasterMind(QString const&, QWidget*) (rgmastermind.cpp:29)
-==3943==    by 0x403CC2: main (main.cpp:19)
-==3943== 
-==3943== 14,112 (48 direct, 14,064 indirect) bytes in 1 blocks are definitely lost in loss record 484 of 488
-==3943==    at 0x4C2A593: operator new(unsigned long) (vg_replace_malloc.c:344)
-==3943==    by 0x404F1C: RgMasterMind::makeMenu() (rgmastermind.cpp:98)
-==3943==    by 0x404322: RgMasterMind::RgMasterMind(QString const&, QWidget*) (rgmastermind.cpp:29)
-==3943==    by 0x403CC2: main (main.cpp:19)
-==3943== 
-==3943== LEAK SUMMARY:
-==3943==    definitely lost: 328 bytes in 3 blocks
-==3943==    indirectly lost: 29,479 bytes in 174 blocks
-==3943==      possibly lost: 0 bytes in 0 blocks
-==3943==    still reachable: 339,102 bytes in 6,984 blocks
-==3943==         suppressed: 0 bytes in 0 blocks
-==3943== Reachable blocks (those to which a pointer was found) are not shown.
-==3943== To see them, rerun with: --leak-check=full --show-leak-kinds=all
-==3943== 
-==3943== For lists of detected and suppressed errors, rerun with: -s
-==3943== ERROR SUMMARY: 3 errors from 3 contexts (suppressed: 0 from 0)
+==5631== Memcheck, a memory error detector
+==5631== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==5631== Using Valgrind-3.15.0 and LibVEX; rerun with -h for copyright info
+==5631== Command: ./mastermind
+==5631== Parent PID: 2793
+==5631== 
+==5631== 
+==5631== HEAP SUMMARY:
+==5631==     in use at exit: 368,925 bytes in 7,161 blocks
+==5631==   total heap usage: 61,401 allocs, 54,240 frees, 815,259,789 bytes allocated
+==5631== 
+==5631== 6,630 (232 direct, 6,398 indirect) bytes in 1 blocks are definitely lost in loss record 467 of 486
+==5631==    at 0x4C2C089: calloc (vg_replace_malloc.c:762)
+==5631==    by 0x15EBA3DF: ??? (in /usr/lib64/libdbus-1.so.3.14.14)
+==5631==    by 0x15EC4779: ??? (in /usr/lib64/libdbus-1.so.3.14.14)
+==5631==    by 0x15EC4BA1: ??? (in /usr/lib64/libdbus-1.so.3.14.14)
+==5631==    by 0x15EB860E: ??? (in /usr/lib64/libdbus-1.so.3.14.14)
+==5631==    by 0x15EA32CE: ??? (in /usr/lib64/libdbus-1.so.3.14.14)
+==5631==    by 0x15E9EBAD: ??? (in /usr/lib64/libdbus-1.so.3.14.14)
+==5631==    by 0x13954CF1: ??? (in /usr/lib64/libQt5DBus.so.5.9.7)
+==5631==    by 0x5BD512D: QObject::event(QEvent*) (in /usr/lib64/libQt5Core.so.5.9.7)
+==5631==    by 0x5BABA54: ??? (in /usr/lib64/libQt5Core.so.5.9.7)
+==5631==    by 0x5BABB6A: QCoreApplication::notifyInternal2(QObject*, QEvent*) (in /usr/lib64/libQt5Core.so.5.9.7)
+==5631==    by 0x5BAE452: QCoreApplicationPrivate::sendPostedEvents(QObject*, int, QThreadData*) (in /usr/lib64/libQt5Core.so.5.9.7)
+==5631== 
+==5631== 6,757 (232 direct, 6,525 indirect) bytes in 1 blocks are definitely lost in loss record 468 of 486
+==5631==    at 0x4C2C089: calloc (vg_replace_malloc.c:762)
+==5631==    by 0x15EBA3DF: ??? (in /usr/lib64/libdbus-1.so.3.14.14)
+==5631==    by 0x15EC4779: ??? (in /usr/lib64/libdbus-1.so.3.14.14)
+==5631==    by 0x15EC4BA1: ??? (in /usr/lib64/libdbus-1.so.3.14.14)
+==5631==    by 0x15EB860E: ??? (in /usr/lib64/libdbus-1.so.3.14.14)
+==5631==    by 0x15EA32CE: ??? (in /usr/lib64/libdbus-1.so.3.14.14)
+==5631==    by 0x13954BAA: ??? (in /usr/lib64/libQt5DBus.so.5.9.7)
+==5631==    by 0x5BD512D: QObject::event(QEvent*) (in /usr/lib64/libQt5Core.so.5.9.7)
+==5631==    by 0x5BABA54: ??? (in /usr/lib64/libQt5Core.so.5.9.7)
+==5631==    by 0x5BABB6A: QCoreApplication::notifyInternal2(QObject*, QEvent*) (in /usr/lib64/libQt5Core.so.5.9.7)
+==5631==    by 0x5BAE452: QCoreApplicationPrivate::sendPostedEvents(QObject*, int, QThreadData*) (in /usr/lib64/libQt5Core.so.5.9.7)
+==5631==    by 0x5BFAA02: ??? (in /usr/lib64/libQt5Core.so.5.9.7)
+==5631== 
+==5631== 8,938 (48 direct, 8,890 indirect) bytes in 1 blocks are definitely lost in loss record 479 of 486
+==5631==    at 0x4C2A593: operator new(unsigned long) (vg_replace_malloc.c:344)
+==5631==    by 0x405146: RgMasterMind::makeMenu() (rgmastermind.cpp:103)
+==5631==    by 0x40432C: RgMasterMind::RgMasterMind(QString const&, QWidget*) (rgmastermind.cpp:27)
+==5631==    by 0x403CC2: main (main.cpp:19)
+==5631== 
+==5631== 14,112 (48 direct, 14,064 indirect) bytes in 1 blocks are definitely lost in loss record 482 of 486
+==5631==    at 0x4C2A593: operator new(unsigned long) (vg_replace_malloc.c:344)
+==5631==    by 0x404F26: RgMasterMind::makeMenu() (rgmastermind.cpp:95)
+==5631==    by 0x40432C: RgMasterMind::RgMasterMind(QString const&, QWidget*) (rgmastermind.cpp:27)
+==5631==    by 0x403CC2: main (main.cpp:19)
+==5631== 
+==5631== LEAK SUMMARY:
+==5631==    definitely lost: 560 bytes in 4 blocks
+==5631==    indirectly lost: 35,877 bytes in 211 blocks
+==5631==      possibly lost: 0 bytes in 0 blocks
+==5631==    still reachable: 332,488 bytes in 6,946 blocks
+==5631==         suppressed: 0 bytes in 0 blocks
+==5631== Reachable blocks (those to which a pointer was found) are not shown.
+==5631== To see them, rerun with: --leak-check=full --show-leak-kinds=all
+==5631== 
+==5631== For lists of detected and suppressed errors, rerun with: -s
+==5631== ERROR SUMMARY: 4 errors from 4 contexts (suppressed: 0 from 0)

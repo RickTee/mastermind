@@ -14,7 +14,6 @@
 class RgButton : public QPushButton {
     Q_OBJECT
 public:
-    //RgButton(const char *name, QPushButton * parent = 0);
     RgButton(int sizeX, int sizeY, QPushButton * parent = 0);
     virtual ~RgButton();
     

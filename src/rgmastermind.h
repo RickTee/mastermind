@@ -38,6 +38,7 @@ private:
     void        compPegs();
     void        endGame();
     void        aboutDialog(int tabIdx);
+    void        randomize(void);
     int         turnCount;
     int         code[COLORS];
     QDialog     *helpAbout;
