@@ -57,9 +57,11 @@ RgMasterMind::RgMasterMind(const QString &title, QWidget * parent) : QWidget(par
     // guess.
     k = 0;
     for (i = 0; i < NUM_OF_TRYS; i++) {
-        whitePegNum[k] = new QLabel("0");
+        whitePegNum[k] = new QLabel();
+        whitePegNum[k]->setNum(0);
         whitePegNum[k]->setAlignment(Qt::AlignCenter);
-        blackPegNum[k] = new QLabel("0");
+        blackPegNum[k] = new QLabel();
+        blackPegNum[k]->setNum(0);
         blackPegNum[k]->setAlignment(Qt::AlignCenter);
         grid->addWidget(whitePegNum[k], i + 2, 4);
         grid->addWidget(blackPegNum[k], i + 2, 6);
@@ -74,7 +76,7 @@ RgMasterMind::RgMasterMind(const QString &title, QWidget * parent) : QWidget(par
     }
     // Add the Guess button which will set the try buttons and calculate
     // the white and black pegs.
-    goButton = new RgButton("Guess");
+    goButton = new QPushButton("Guess");
     grid->addWidget(goButton, 13, 4, 1, 3);
     connect(goButton, SIGNAL(clicked()), SLOT(guess()));
 
@@ -90,33 +92,28 @@ RgMasterMind::RgMasterMind(const QString &title, QWidget * parent) : QWidget(par
 RgMasterMind::~RgMasterMind() {
 }
 
-// Create a menu bar and add a File menu with entries for 'New game' and 'Quit'
-
+// Create a menu bar and add a File menu and Help menu'
 void RgMasterMind::makeMenu() {
-    menuBar = new QMenuBar;
-
-    fileMenu = new QMenu(tr("&File"), this);
+    menuBar = new QMenuBar();
+    fileMenu = new QMenu("File");
     newGameAction = new QAction(QIcon("icons/new-game.png"), "New game");
-    connect(newGameAction, SIGNAL(triggered()), this, SLOT(newGame()));
     fileMenu->addAction(newGameAction);
-
     fileMenu->addSeparator();
-
     quitAction = new QAction(QIcon("icons/exit.png"), "Quit");
-    connect(quitAction, SIGNAL(triggered()), this, SLOT(close()));
     fileMenu->addAction(quitAction);
-
-    aboutMenu = new QMenu(tr("&Help"), this);
-    aboutAction = new QAction(QIcon("icons/help-about.png"), "About");
-    connect(aboutAction, SIGNAL(triggered()), this, SLOT(about()));
-    aboutMenu->addAction(aboutAction);
-    
-    instrctAction = new QAction(QIcon("icons/help-contents.png"), "Instructions");
-    connect(instrctAction, SIGNAL(triggered()), this, SLOT(instructions()));
-    aboutMenu->addAction(instrctAction);
-
     menuBar->addMenu(fileMenu);
-    menuBar->addMenu(aboutMenu);
+
+    helpMenu = new QMenu("Help");
+    aboutAction = new QAction(QIcon("icons/help-about.png"), "About");
+    helpMenu->addAction(aboutAction);
+    instructAction = new QAction(QIcon("icons/help-contents.png"), "Instructions");
+    helpMenu->addAction(instructAction);
+    menuBar->addMenu(helpMenu);
+    
+    connect(newGameAction, SIGNAL(triggered()),  SLOT(newGame()));
+    connect(quitAction, SIGNAL(triggered()), SLOT(close()));
+    connect(aboutAction, SIGNAL(triggered()), SLOT(about()));
+    connect(instructAction, SIGNAL(triggered()), SLOT(instructions()));
 }
 
 // Reset all buttons, black and white peg labels and guess count, generate a new secret code, 
@@ -125,22 +122,22 @@ void RgMasterMind::newGame() {
     
     int i;
     for(i = 0; i < CODE_LEN; i++) {
-        this->codeButtons[i]->setColor(6);
-        this->guessButtons[i]->setColor(rgRnd());
+        codeButtons[i]->setColor(6);
+        guessButtons[i]->setColor(rgRnd());
         // Generate a new code
         code[i] = rgRnd();
     }
     for(i = 0; i < NUM_OF_TRY_BTNS; i++) {
-        this->tryButtons[i]->setColor(6);
+        tryButtons[i]->setColor(6);
     }
     
     for(i = 0; i < NUM_OF_TRYS; i++) {
-        this->blackPegNum[i]->setText("0");
-        this->whitePegNum[i]->setText("0");
+        blackPegNum[i]->setNum(0);
+        whitePegNum[i]->setNum(0);
     }
-    this->turnCount = 0;
+    turnCount = 0;
     // Enable the Guess button
-    this->goButton->setEnabled(true);
+    goButton->setEnabled(true);
 }
 
 void RgMasterMind::cycleColor() {
@@ -158,8 +155,8 @@ void RgMasterMind::cycleColor() {
 void RgMasterMind::guess() {
     int i, colorIndex;
     for (i = 0; i < CODE_LEN; i++) {
-        colorIndex = this->guessButtons[i]->getIndex();
-        this->tryButtons[i + turnCount]->setColor(colorIndex);
+        colorIndex = guessButtons[i]->getIndex();
+        tryButtons[i + turnCount]->setColor(colorIndex);
     }
     compPegs();
 }
@@ -167,9 +164,9 @@ void RgMasterMind::guess() {
 void RgMasterMind::compPegs() {
     // Check secret code for matches set score labels with
     // black and white peg numbers;
-    int i, j, idx, blackPegs, whitePegs = 0;
+    int i, j, idx, blackPegs=0, whitePegs = 0;
     for (i = 0; i < CODE_LEN; i++) {
-        if (this->guessButtons[i]->getIndex() == code[i]) {
+        if (guessButtons[i]->getIndex() == code[i]) {
             blackPegs++;
         }
     }
@@ -178,17 +175,16 @@ void RgMasterMind::compPegs() {
     }
     for (i = 0; i < CODE_LEN; i++) {
         for (j = 0; j < CODE_LEN; j++) {
-            idx = this->guessButtons[i]->getIndex();
+            idx = guessButtons[i]->getIndex();
             if (idx == code[j]) {
                 whitePegs++;
                 break;
             }
         }
     }
-    QString pegs;
     whitePegs = whitePegs - blackPegs;
-    this->whitePegNum[turnCount/4]->setText(pegs.setNum(whitePegs));
-    this->blackPegNum[turnCount/4]->setText(pegs.setNum(blackPegs));
+    whitePegNum[turnCount/4]->setNum(whitePegs);
+    blackPegNum[turnCount/4]->setNum(blackPegs);
     
     turnCount += 4;
     if (turnCount >= NUM_OF_TRYS * 4) {
@@ -202,7 +198,7 @@ void RgMasterMind::endGame() {
     for (i = 0; i < CODE_LEN; i++) {
         codeButtons[i]->setColor(code[i]);
     }
-    this->goButton->setDisabled(true);
+    goButton->setDisabled(true);
 }
 
 void RgMasterMind::about() {
@@ -214,9 +210,9 @@ void RgMasterMind::instructions() {
 }
 
 void RgMasterMind::aboutDialog(int tabIdx) {
-    this->helpAbout = new QDialog(this);
-    this->helpAbout->setModal(true);
-    this->helpAbout->setWindowTitle("About");
+    helpAbout = new QDialog(this);
+    helpAbout->setModal(true);
+    helpAbout->setWindowTitle("About");
     QVBoxLayout *vbox = new QVBoxLayout;
     
     const QString *aboutString = new QString(APPLICATION"\n" DESCRIPTION"\n" "Author: " AUTHOR"\n" EMAIL);
@@ -240,8 +236,8 @@ void RgMasterMind::aboutDialog(int tabIdx) {
     connect(btn, SIGNAL(clicked()), helpAbout, SLOT(close()));
     vbox->addWidget(btn);
 
-    this->helpAbout->setLayout(vbox);
-    this->helpAbout->show();
+    helpAbout->setLayout(vbox);
+    helpAbout->show();
 }
 
 int RgMasterMind::rgRnd() {

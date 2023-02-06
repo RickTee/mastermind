@@ -19,6 +19,7 @@
 #include <QGridLayout>
 #include <QTabWidget>
 #include <QMenuBar>
+#include <QMenu>
 #include <QFrame>
 #include <QLabel>
 #include <QDialog>
@@ -32,22 +33,21 @@ public:
     RgMasterMind(const RgMasterMind & orig, QWidget * parent = 0);
     virtual ~RgMasterMind();
 private:
-    void makeMenu();
+    void        makeMenu();
     int         rgRnd();
     void        compPegs();
     void        endGame();
     void        aboutDialog(int tabIdx);
-    int         *rgrand;
     int         turnCount;
     int         code[COLORS];
     QDialog     *helpAbout;
     QMenuBar    *menuBar;
     QMenu       *fileMenu;
-    QMenu       *aboutMenu;
+    QMenu       *helpMenu;
     QAction     *newGameAction;
     QAction     *quitAction;
     QAction     *aboutAction;
-    QAction     *instrctAction;
+    QAction     *instructAction;
     QVBoxLayout *vbox;
     QVBoxLayout *scoreVbox;
     QGridLayout *grid;

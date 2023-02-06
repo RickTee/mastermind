@@ -12,13 +12,13 @@
 int main(int argc, char *argv[]) {
     // initialize resources, if needed
     // Q_INIT_RESOURCE(resfile);
-
+    
     QApplication app(argc, argv);
 
     // create and show your widgets here
-    RgMasterMind *game = new RgMasterMind("MasteringtonMindersville");
+    RgMasterMind game("MasteringtonMindersville");
     
-    game->show();
+    game.show();
 
     return app.exec();
 }
