@@ -13,7 +13,8 @@
 
 #define SPC         " "
 #define RELEASE     "0.1"
-#define REVISION    ".5"
+#define REVISION    ".6"
+#define UPDATE      "07 Feb 2023"
 #define DATE        "(Feb 2020)"
 #define YEAR        "2020 - 2024"
 #define VERSION     "Version: " RELEASE REVISION SPC DATE

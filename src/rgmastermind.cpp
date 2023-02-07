@@ -89,6 +89,12 @@ RgMasterMind::RgMasterMind(const QString &title, QWidget * parent) : QWidget(par
 // Destructor
 RgMasterMind::~RgMasterMind() {
 }
+
+void RgMasterMind::closeEvent(QCloseEvent *event){
+    emit exit(0);
+    event->accept();
+}
+
 // Create a menu bar and add a File menu and Help menu'
 void RgMasterMind::makeMenu() {
     menuBar = new QMenuBar();

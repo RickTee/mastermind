@@ -18,6 +18,7 @@
 #include <QHBoxLayout>
 #include <QGridLayout>
 #include <QTabWidget>
+#include <QCloseEvent>
 #include <QMenuBar>
 #include <QMenu>
 #include <QFrame>
@@ -39,6 +40,7 @@ private:
     void        endGame();
     void        aboutDialog(int tabIdx);
     void        randomize(void);
+    void        closeEvent(QCloseEvent *event);
     int         turnCount;
     int         code[COLORS];
     QDialog     *helpAbout;
